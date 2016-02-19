@@ -1,0 +1,6 @@
+plugin:
+    name: 'klubitus.comment::lang.plugin.name'
+    description: 'klubitus.comment::lang.plugin.description'
+    author: 'Antti Qvickström'
+    icon: oc-icon-comment
+    homepage: 'https://github.com/anqqa/oc-comment-plugin'
