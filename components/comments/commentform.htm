@@ -1,0 +1,17 @@
+{{ form_ajax(__SELF__ ~ '::onComment', {
+    class: 'form form--horizontal',
+    'data-request-update': "'" ~ __SELF__ ~ "::comment': '^section.comments .comments'",
+    'data-request-success': "$(this).find('[name=comment]').val('')"
+}) }}
+    <input type="hidden" name="id" value="{{ __SELF__.commentable.id }}">
+
+    <div class="input">
+        <input type="text"
+               class="input__field"
+               name="comment"
+               placeholder="{{ 'Enter your comment'|_ }}...">
+    </div>
+
+    <button type="submit" class="button button--primary">{{ 'Comment'|_ }}</button>
+
+{{ form_close() }}

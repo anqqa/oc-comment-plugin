@@ -1,0 +1,18 @@
+<section class="comments">
+    <h2>{{ 'Comments'|_ }}</h2>
+
+    {% if __SELF__.user %}
+        {% partial "@commentform" %}
+    {% else %}
+        <p>
+            {{ 'Login to comment.'|_ }}
+        </p>
+    {% endif %}
+
+    <div class="comments">
+        {% for comment in __SELF__.comments %}
+            {% partial "@comment" comment=comment %}
+        {% endfor %}
+    </div>
+
+</section>

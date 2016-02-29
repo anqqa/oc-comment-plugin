@@ -1,0 +1,13 @@
+<div class="media comment">
+    <a href="{{ comment.userUrl }}" class="avatar media__image">
+        <img src="{{ comment.user.avatar }}" alt="">
+    </a>
+    <div class="media__body">
+        <a href="{{ comment.userUrl }}">{{ comment.user.username }}</a>
+        &centerdot; <span title="{{ comment.created_at.format('j.n.Y H:i') }}">{{ comment.created_at.diffForHumans }}</span>
+        <br>
+        <p>
+            {{ comment.content|bbcode(true) }}
+        </p>
+    </div>
+</div>
