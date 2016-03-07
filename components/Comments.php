@@ -78,6 +78,14 @@ class Comments extends ComponentBase {
             $model      = $modelClass::findOrFail($modelId);
             $comment    = CommentModel::createInModel($model, $user, post());
 
+            // Update comment count?
+            if (!is_null($model->comment_count)) {
+                $timestamps = $model->timestamps;
+                $model->timestamps = false;
+                $model->increment('comment_count');
+                $model->timestamps = $timestamps;
+            }
+
             $comment->setUserUrl($this->property('userPage'), $this->controller);
             $this->page['comment'] = $comment;
 
