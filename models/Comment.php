@@ -1,5 +1,6 @@
 <?php namespace Klubitus\Comment\Models;
 
+use Auth;
 use Cms\Classes\Controller;
 use Model;
 use October\Rain\Database\Traits\Validation;
@@ -38,6 +39,49 @@ class Comment extends Model {
         'user_id' => 'required',
         'content' => 'required',
     ];
+
+
+    /**
+     * Can the user delete this?
+     *
+     * @param  UserModel|int  $user
+     * @param  int            $commentable_user_id
+     * @return  bool
+     */
+    public function canDelete($user = null, $commentable_user_id = null) {
+        if (is_null($user)) {
+            $user = Auth::getUser();
+        }
+
+        if (!$user) {
+            return false;
+        }
+
+        $user_id = $user instanceof UserModel ? $user->id : (int)$user;
+
+        return in_array($user_id, [$this->user_id, $commentable_user_id]);
+    }
+
+
+    /**
+     * Can the user edit this?
+     *
+     * @param  UserModel|int  $user
+     * @return  bool
+     */
+    public function canEdit($user = null) {
+        if (is_null($user)) {
+            $user = Auth::getUser();
+        }
+
+        if (!$user) {
+            return false;
+        }
+
+        $user_id = $user instanceof UserModel ? $user->id : (int)$user;
+
+        return $user_id == $this->user_id;
+    }
 
 
     /**
